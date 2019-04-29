@@ -11,8 +11,27 @@ const database = mysql.createConnection({
   database: "bamazon_db"
 });
 
+// runs prompt to either purchase or exit the program
+function start(){
 
-function start() {
+  inquirer
+    .prompt([{
+      name: "start",
+      message: "What would you like to do?",
+      type: "list",
+      choices: ["Purchase", "Leave"]
+    }])
+      .then(function(answers){
+        if(answers.start === "Purchase"){
+          return purchase();
+        } else if (answers.start === "Leave"){
+          database.end();
+        }
+      })
+};
+
+
+function purchase() {
   // Pulls all the products, their ids, and price 
   database.query("SELECT * FROM products", function (err, itemData) {
     if (err) throw err;
@@ -35,7 +54,6 @@ ID: ${itemData[i].id} | Product: ${itemData[i].product_name} | Price: $${itemDat
             return "Please enter a valid ID."
           }
         }
-
       },
       {
         message: "How many would you like to purchase",
@@ -61,7 +79,7 @@ ID: ${itemData[i].id} | Product: ${itemData[i].product_name} | Price: $${itemDat
       // lets the customer know if there isn't enough to place the order
       if (selectedItem.stock_quantity < amount) {
         console.log("Looks like we don't have enough in stock for you.")
-        return start();
+        return purchase();
       } 
       
       // Lets the customer know their order has been placed and updates the new stock amount in the database
