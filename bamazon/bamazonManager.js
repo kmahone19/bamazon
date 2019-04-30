@@ -56,7 +56,7 @@ ID: ${itemData[i].id} | Product: ${itemData[i].product_name} | Price: $${itemDat
 
 // pulls only the products with low inventory (<5)
 function lowInventory() {
-  database.query("SELECT * FROM products HAVING stock_quanity <= 5", function (err, itemData) {
+  database.query("SELECT * FROM products WHERE stock_quantity BETWEEN 0 AND 5;", function (err, itemData) {
     if (err) throw err;
     for (var i = 0; i < itemData.length; i++) {
       console.log(`
@@ -78,7 +78,7 @@ function addInventory() {
         default: "3",
         type: "input",
         validate: function (idInput) {
-          if (!isNaN(idInput) && idInput >= 0 && idInput <= 10) {
+          if (!isNaN(idInput) && idInput >= 0) {
             return true;
           } else {
             return "Please enter a valid ID."
@@ -91,7 +91,7 @@ function addInventory() {
         default: "10",
         type: "input",
         validate: function (idInput) {
-          if (!isNaN(idInput) && idInput >= 0 && idInput <= 10) {
+          if (!isNaN(idInput) && idInput >= 0) {
             return true;
           } else {
             return "Please enter a valid amount."
@@ -100,82 +100,83 @@ function addInventory() {
       }
     ])
     .then(function (answers) {
-      var amount = answers.amount;
-      var purchaseId = parseInt(answers.itemId);
-      const selectedItem = itemData.find(item => item.id == purchaseId);
-      var newStock = selectedItem.stock_quantity + amount;
-      database.query("UPDATE products SET stock_quantity = ? WHERE id =?", [newStock, purchaseId], function (err, res) {
-        if (err) throw err;
-        console.log("The stock has been updated!");
-        return start();
+      database.query("SELECT * FROM products", function (err, itemData) {
+        var amount = answers.amount;
+        var purchaseId = parseInt(answers.itemId);
+        const selectedItem = itemData.find(item => item.id == purchaseId);
+        var newStock = selectedItem.stock_quantity + amount;
+        database.query("UPDATE products SET stock_quantity = ? WHERE id =?", [newStock, purchaseId], function (err, res) {
+          if (err) throw err;
+          console.log("The stock has been updated!");
+          return start();
+        })
       })
-    })
-};
+    })};
 
-// runs a prompt and uses the answers to create a new product
-function addProduct() {
-  inquirer
-    .prompt([{
-        name: "product_name",
-        type: "input",
-        messgae: "Name of the product:",
-        validate: function (inputValue) {
-          if (inputValue !== "") {
-            return true;
-          } else {
-            return "Please provide an item name"
+  // runs a prompt and uses the answers to create a new product
+  function addProduct() {
+    inquirer
+      .prompt([{
+          name: "product_name",
+          type: "input",
+          messgae: "Name of the product:",
+          validate: function (inputValue) {
+            if (inputValue !== "") {
+              return true;
+            } else {
+              return "Please provide an item name"
+            }
+          }
+        },
+        {
+          name: "department_name",
+          type: "input",
+          message: "Name of the Department:",
+          validate: function (inputValue) {
+            if (inputValue !== "") {
+              return true;
+            } else {
+              return "Please provide a department"
+            }
+          }
+        },
+        {
+          name: "price",
+          type: "input",
+          message: " Enter price of product:",
+          validate: function (idInput) {
+            if (!isNaN(idInput) && idInput >= 0) {
+              return true;
+            } else {
+              return "Please enter a valid price."
+            }
+          }
+        },
+        {
+          name: "stock_quantity",
+          type: "input",
+          message: "Enter stock quantity:",
+          validate: function (idInput) {
+            if (!isNaN(idInput) && idInput >= 0) {
+              return true;
+            } else {
+              return "Please enter a valid stock quanity."
+            }
           }
         }
-      },
-      {
-        name: "department_name",
-        type: "input",
-        message: "Name of the Department:",
-        validate: function (inputValue) {
-          if (inputValue !== "") {
-            return true;
-          } else {
-            return "Please provide a department"
-          }
-        }
-      },
-      {
-        name: "price",
-        type: "input",
-        message: " Enter price of product:",
-        validate: function (idInput) {
-          if (!isNaN(idInput) && idInput >= 0 && idInput <= 10) {
-            return true;
-          } else {
-            return "Please enter a valid price."
-          }
-        }
-      },
-      {
-        name: "stock_quantity",
-        type: "input",
-        message: "Enter stock quantity:",
-        validate: function (idInput) {
-          if (!isNaN(idInput) && idInput >= 0 && idInput <= 10) {
-            return true;
-          } else {
-            return "Please enter a valid stock quanity."
-          }
-        }
-      }
-    ])
-    .then(function(itemInfo){
-      const queryString = "INSERT INTO products SET ?";
+      ])
+      .then(function (itemInfo) {
+        const queryString = "INSERT INTO products SET ?";
 
-      const query = database.query(queryString, itemInfo, function(err, res){
-        if(err) throw err;
-        
-        console.log("The new product has been added!");
+        const query = database.query(queryString, itemInfo, function (err, res) {
+          if (err) throw err;
 
-        return start();
+          console.log("The new product has been added!");
+
+          return start();
+        })
       })
-    })
-}
+  }
 
-// runs the openning prompt on start
-start();
+  // runs the openning prompt on start
+  start();

@@ -48,7 +48,7 @@ ID: ${itemData[i].id} | Product: ${itemData[i].product_name} | Price: $${itemDat
         default: "3",
         type: "input",
         validate: function (idInput) {
-          if (!isNaN(idInput) && idInput >= 0 && idInput <= 10) {
+          if (!isNaN(idInput) && idInput >= 0 ) {
             return true;
           } else {
             return "Please enter a valid ID."
@@ -61,7 +61,7 @@ ID: ${itemData[i].id} | Product: ${itemData[i].product_name} | Price: $${itemDat
         default: "15",
         type: "input",
         validate: function (idInput) {
-          if (!isNaN(idInput) && idInput >= 0 && idInput <= 10) {
+          if (!isNaN(idInput) && idInput >= 0 ) {
             return true;
           } else {
             return "Please enter a valid number to purchase."
