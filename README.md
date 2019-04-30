@@ -24,19 +24,19 @@ Upon running bammazonCust in the comand line you will be greated with the inital
 
 #### Customer side Running
 
-#####Start:
+##### Start:
 
 ![Customer Start point](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustStart.JPG)
 
-#####Purchase:
+##### Purchase:
 
 ![Customer Purchase](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustPurchase.JPG)
 
-#####Successful Purchase:
+##### Successful Purchase:
 
 ![Successful purchase](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustComplete_1.JPG)
 
-#####Unsuccessful Purchase:
+##### Unsuccessful Purchase:
 
 ![Unsuccessful purchase](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustComplete_2.JPG)
 
