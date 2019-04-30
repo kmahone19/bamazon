@@ -24,27 +24,51 @@ Upon running bammazonCust in the comand line you will be greated with the inital
 
 #### Customer side Running
 
+#####Start:
+
+![Customer Start point](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustStart.JPG)
+
+#####Purchase:
+
+![Customer Purchase](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustPurchase.JPG)
+
+#####Successful Purchase:
+
+![Successful purchase](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustComplete_1.JPG)
+
+#####Unsuccessful Purchase:
+
+![Unsuccessful purchase](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/CustComplete_2.JPG)
 
 ----
 ### Bamazon Manager
 
 Upon running bamazonManager.js, you will be prompted with four comands, View Products for sale, View low inventory, Add to Inventroy, and Add New Product. Upon running each of the comands, it will return you to the initial comand prompt.
 
+![Manager Start](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/managerStart.JPG)
+
 #### View Products for Sale
 
 Selecting this comand will display all of the available products with their ids, deperatment name, the price, and the stock quanity.
 
+![View Products](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/managerView.JPG)
+
 #### View low inventory
 
-Selecting this comand will show all the information products with stock quanity lower than 5. 
+Selecting this comand will show all the information products with stock quanity lower than 5.
+
+![View low produucts](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/managerLow.JPG)
 
 #### Add to Inventory
 
 This command will show an additional prompt to select an item by it's id and setting an amount to add to the stock quantity.
 
+![Add inventory](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/managerAddStock.JPG)
+
 #### Add New Product
 
 This comand will show an additional prompt to fill out all the infromation for a brand new product to be added to the database.
 
+![Add new product](https://github.com/kmahone19/bamazon/blob/master/bamazon/images/managerAddItem.JPG)
 
 
